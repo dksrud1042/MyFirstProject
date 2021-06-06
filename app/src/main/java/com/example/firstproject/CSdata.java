@@ -9,13 +9,13 @@ public class CSdata {
     private int dry_skin;
     private int sensitivity_skin;
 
-    public CSdata(String name, int grade, int allergies, int oily_skin, int dry_skin, int sensitivity_skin){
+    public CSdata(String name){
         this.name = name;
-        this.grade = grade;
-        this.allergies = allergies;
-        this.oily_skin = oily_skin;
-        this.dry_skin = dry_skin;
-        this.sensitivity_skin = sensitivity_skin;
+//        this.grade = grade;
+//        this.allergies = allergies;
+//        this.oily_skin = oily_skin;
+//        this.dry_skin = dry_skin;
+//        this.sensitivity_skin = sensitivity_skin;
     }
 
     public String getName() {

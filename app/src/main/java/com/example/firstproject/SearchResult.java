@@ -9,6 +9,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.opencsv.CSVReader;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 public class SearchResult extends AppCompatActivity {
 
     @Override
@@ -23,11 +28,29 @@ public class SearchResult extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         CSdataAdapter adapter = new CSdataAdapter();
 
+        //CSV파일 읽기
+        try {
+            InputStreamReader is = new InputStreamReader(getResources().openRawResource(R.raw.result2));
+            BufferedReader reader = new BufferedReader(is);
+            CSVReader read = new CSVReader(reader);
+            String[] record = null;
+            while ((record = read.readNext()) != null){
+                for(int i = 0; i <record.length;i++)
+                {
+                    adapter.addItem(new CSdata(record[i]));
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
         //RecyclerView안에 data 넣기(사진,이름)
-        adapter.addItem(new CSdata(R.drawable.ic_launcher_background,"1번"));
-        adapter.addItem(new CSdata(R.drawable.ic_launcher_foreground,"2번"));
-        adapter.addItem(new CSdata(R.drawable.ic_launcher_foreground,"3번"));
-        adapter.addItem(new CSdata(R.drawable.ic_launcher_background,"4번"));
+        adapter.addItem(new CSdata("1번"));
+        adapter.addItem(new CSdata("2번"));
+        adapter.addItem(new CSdata("3번"));
+        adapter.addItem(new CSdata("4번"));
 
         recyclerView.setAdapter(adapter);
 
