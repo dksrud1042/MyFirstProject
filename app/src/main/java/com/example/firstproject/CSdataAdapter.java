@@ -1,5 +1,6 @@
 package com.example.firstproject;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +10,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 public class CSdataAdapter extends RecyclerView.Adapter<CSdataAdapter.ViewHolder> implements OnRecyclerItemClickListener{
-    ArrayList<CSdata> items = new ArrayList<CSdata>();
+    ArrayList<CSdata> items = new ArrayList<>();
+
     static OnRecyclerItemClickListener listener;
 
     public void addItem(CSdata item){
@@ -48,8 +55,7 @@ public class CSdataAdapter extends RecyclerView.Adapter<CSdataAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //뷰홀더 재사용
         CSdata item = items.get(position);
-        //카드뷰에 이미지,텍스트 값
-        holder.CSImage.setImageResource(item.getCSImage());
+        //카드뷰에 텍스트
         holder.CSName.setText(item.getName());
     }
 
@@ -93,7 +99,6 @@ public class CSdataAdapter extends RecyclerView.Adapter<CSdataAdapter.ViewHolder
         }
 
         public void setItem(CSdata item){
-            CSImage.setImageResource(item.getCSImage());
             CSName.setText(item.getName());
         }
     }

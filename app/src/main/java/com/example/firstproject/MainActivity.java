@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -12,6 +13,14 @@ import android.widget.Toast;
 
 import com.pedro.library.AutoPermissions;
 import com.pedro.library.AutoPermissionsListener;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AutoPermissionsListener {
     //region Intent간 이동하는 requestCode값
@@ -61,7 +70,67 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
             }
         });
         //endregion
+
+        //csv파일읽기//////////////////////////////////////
+        readCsvData();
     }
+
+    //파일 읽는부분////////////////////////////////////////
+    private void readCsvData() {
+        InputStream is = getResources().openRawResource(R.raw.result);
+        BufferedReader reader = new BufferedReader(
+                new InputStreamReader(is, Charset.forName("UTF-8"))
+        );
+
+        String line = "";
+        try {
+            //헤더부분 건너뛰기
+            reader.readLine();
+
+            while ((line = reader.readLine()) != null) {
+                // split by ','
+                String[] tokens = line.split(",");
+
+                //read the data
+                CSdata sample = new CSdata();
+                sample.setName(tokens[1]);
+                //tokens[1] == "검색하는 제품 이름"이면 if 해서 sample값에 담기게된다
+                
+                sample.setGrade(Integer.parseInt(tokens[3]));
+                if (tokens[4].length() > 0) {
+                    sample.setAllergies(Integer.parseInt(tokens[4]));
+                } else {
+                    sample.setAllergies(2);
+                }
+
+                if (tokens[5].length() > 0) {
+                    sample.setOily_skin(Integer.parseInt(tokens[5]));
+                } else {
+                    sample.setOily_skin(2);
+                }
+
+                if (tokens[6].length() > 0) {
+                    sample.setDry_skin(Integer.parseInt(tokens[6]));
+                } else {
+                    sample.setDry_skin(2);
+                }
+
+                if (tokens.length >= 8 && tokens[7].length() > 0) {
+                    sample.setSensitivity_skin(Integer.parseInt(tokens[7]));
+                } else {
+                    sample.setSensitivity_skin(2);
+                }
+
+
+                Log.d("shat", "yeee!" + sample);
+            }
+        } catch (IOException e) {
+            Log.wtf("shat", "error" + line, e);
+            e.printStackTrace();
+        }
+
+    }
+    ///////////////////////////////////////////
 
 
     //region 위험권환 부여
