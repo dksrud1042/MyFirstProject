@@ -18,7 +18,7 @@ public class MainContent extends AppCompatActivity {
         //제품 이름 받기
         TextView textView = findViewById(R.id.Name1);
         Intent intent = getIntent();
-        String message = intent.getStringExtra("메세지");
+        String message = intent.getStringExtra("제품명");
         textView.setText(message);
 
         RecyclerView recyclerView2 = findViewById(R.id.recyclerView2);
@@ -28,7 +28,7 @@ public class MainContent extends AppCompatActivity {
         MaindataAdapter adapter = new MaindataAdapter();
 
         //RecyclerView안에 data 넣기(사진,이름)
-        adapter.addItem(new Maindata(R.drawable.ic_launcher_background,"1번"));
+        adapter.addItem(new Maindata(R.drawable.grade1,"1번"));
         adapter.addItem(new Maindata(R.drawable.ic_launcher_foreground,"2번"));
         adapter.addItem(new Maindata(R.drawable.ic_launcher_foreground,"3번"));
         adapter.addItem(new Maindata(R.drawable.ic_launcher_background,"4번"));

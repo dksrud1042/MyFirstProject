@@ -57,6 +57,7 @@ public class CSdataAdapter extends RecyclerView.Adapter<CSdataAdapter.ViewHolder
         CSdata item = items.get(position);
         //카드뷰에 텍스트
         holder.CSName.setText(item.getName());
+        holder.CSImage.setImageResource(item.getCSImage());
     }
 
     //data set 전체크기
@@ -99,7 +100,9 @@ public class CSdataAdapter extends RecyclerView.Adapter<CSdataAdapter.ViewHolder
         }
 
         public void setItem(CSdata item){
+
             CSName.setText(item.getName());
+            CSImage.setImageResource(item.getCSImage());
         }
     }
 
