@@ -29,7 +29,6 @@ public class SearchResult extends AppCompatActivity {
 
         //CSV파일 읽기
         try {
-
             InputStreamReader is = new InputStreamReader(getResources().openRawResource(R.raw.result2));
             BufferedReader reader = new BufferedReader(is);
             reader.readLine();
