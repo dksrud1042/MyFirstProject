@@ -13,9 +13,10 @@ import com.opencsv.CSVReader;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class SearchResult extends AppCompatActivity {
-
+    private ArrayList<String> all_ingre = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +73,7 @@ public class SearchResult extends AppCompatActivity {
                             break;
                     }
                 }
+                all_ingre.add(record[4]);
             }
 //            for(int i = 0; i <record.length;i++)
 //            {
@@ -91,6 +93,7 @@ public class SearchResult extends AppCompatActivity {
                 CSdata item = adapter.getItem(position);
                 Intent intent = new Intent(getApplicationContext(),MainContent.class);
                 intent.putExtra("제품명",item.getName());
+                intent.putExtra("성분이름", all_ingre);
                 startActivityForResult(intent,MainActivity.MAINCONTENT_CODE);
 
                 Toast.makeText(getApplicationContext(),"아이템 선택 " + item.getName(), Toast.LENGTH_LONG).show();
