@@ -50,6 +50,7 @@ public class MaindataAdapter extends RecyclerView.Adapter<MaindataAdapter.ViewHo
         Maindata item = items.get(position);
         //카드뷰에 이미지,텍스트 값
         holder.CSName.setText(item.getName());
+        holder.CSImage.setImageResource(item.getCSImage());
     }
 
     //data set 전체크기
@@ -64,16 +65,18 @@ public class MaindataAdapter extends RecyclerView.Adapter<MaindataAdapter.ViewHo
     }
 
     static class ViewHolder extends  RecyclerView.ViewHolder{
+        ImageView CSImage;
         TextView CSName;
 
         //ViewHolder생성 + 클릭 이벤트(자세한 값은 SearchResult에서 조정)
         public ViewHolder(View itemView){
             super(itemView);
-
+            CSImage = itemView.findViewById(R.id.CSImage);
             CSName = itemView.findViewById(R.id.CSName);
 
         }
         public void setItem(CSdata item) {
+            CSImage.setImageResource(item.getCSImage());
             CSName.setText(item.getName());
         }
     }

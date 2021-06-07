@@ -11,12 +11,16 @@ import android.widget.Toast;
 
 import com.opencsv.CSVReader;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class SearchResult extends AppCompatActivity {
-    private ArrayList<String> all_ingre = null;
+
+    private ArrayList<String> all_ingre = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +42,8 @@ public class SearchResult extends AppCompatActivity {
             CSVReader read = new CSVReader(reader);
             String[] record = null;
             while ((record = read.readNext()) != null){
+                record[2] = StringUtils.deleteWhitespace(record[2]);
+                message = StringUtils.deleteWhitespace(message);
                 if(record[2].contains(message))
                 {
                     switch (record[3]) {
@@ -72,8 +78,9 @@ public class SearchResult extends AppCompatActivity {
                             adapter.addItem(new CSdata(record[2], R.drawable.grade9));
                             break;
                     }
+                    all_ingre.add(record[4]);
                 }
-                all_ingre.add(record[4]);
+
             }
 //            for(int i = 0; i <record.length;i++)
 //            {

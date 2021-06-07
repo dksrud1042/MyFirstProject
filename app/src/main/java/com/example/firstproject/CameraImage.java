@@ -79,11 +79,11 @@ public class CameraImage extends AppCompatActivity {
                 }else{
                     //검색 결과 액티비티로 이동
                     Intent intent = new Intent(getApplicationContext(), SearchResult.class);
-                    startActivityForResult(intent, MainActivity.SEARCHRESULT_CODE);
                     if (message != null) {
                         //추출된 text값 보내기
                         intent.putExtra("텍스트인식", message);
                     }
+                    startActivityForResult(intent, MainActivity.SEARCHRESULT_CODE);
                     TextCheck = false;
                 }
             }
