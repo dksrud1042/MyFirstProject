@@ -39,14 +39,8 @@
                     android:paddingLeft="10dp"
                     android:text="이름"
                     android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    android:textSize="30sp" />
 
-                <TextView
-                    android:id="@+id/Contentingre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="15dp"
-                    android:text="타입쓰기" />
             </LinearLayout>
 
         </LinearLayout>

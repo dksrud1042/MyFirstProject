@@ -4,6 +4,7 @@ public class Maindata {
 
     int CSImage;
     String name;
+    String ingre_name;
 
     public Maindata(String name, int CSImage) {
         this.name = name;

@@ -19,6 +19,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainContent extends AppCompatActivity {
+    private int cnt_allergies = 0;
+    private int cnt_good_oily = 0;
+    private int cnt_bad_oily = 0;
+    private int cnt_good_dry = 0;
+    private int cnt_bad_dry = 0;
+    private int cnt_good_sens = 0;
+    private int cnt_bad_sens = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +34,19 @@ public class MainContent extends AppCompatActivity {
 
         //제품 이름 받기
         TextView textView = findViewById(R.id.Name1);
+        TextView textView1 = findViewById(R.id.jisung1);
+        TextView textView2 = findViewById(R.id.jisung2);
+        TextView textView3 = findViewById(R.id.gunsung1);
+        TextView textView4 = findViewById(R.id.gunsung2);
+        TextView textView5 = findViewById(R.id.mingam1);
+        TextView textView6 = findViewById(R.id.mingam2);
+        TextView textView7 = findViewById(R.id.alergi2);
+
         Intent intent = getIntent();
         String message = intent.getStringExtra("제품명");
 //        String all_ingre = intent.getStringExtra("모든성분");
         textView.setText(message);
+
 
         RecyclerView recyclerView2 = findViewById(R.id.recyclerView2);
         //세로 레이아웃 활용
@@ -94,15 +110,40 @@ public class MainContent extends AppCompatActivity {
                             adapter.addItem(new Maindata(ingreRecord[1], R.drawable.grade9));
                             break;
                     }
+
+                    if (ingreRecord[4] != null && ingreRecord[4].equals("1")){
+                        cnt_allergies += 1;
+                    }
+                    if (ingreRecord[5] != null && ingreRecord[5].equals("0")){
+                        cnt_good_oily += 1;
+                    } else if (ingreRecord[5] != null && ingreRecord[5].equals("1")){
+                        cnt_bad_oily += 1;
+                    }
+                    if (ingreRecord[6] != null && ingreRecord[6].equals("0")){
+                        cnt_good_dry += 1;
+                    } else if (ingreRecord[6] != null && ingreRecord[6].equals("1")){
+                        cnt_bad_dry += 1;
+                    }
+                    if (ingreRecord[7] != null && ingreRecord[7].equals("0")){
+                        cnt_good_sens += 1;
+                    } else if (ingreRecord[7] != null && ingreRecord[7].equals("1")){
+                        cnt_bad_sens += 1;
+                    }
                 }
+
             }
-//            for(int i = 0; i <record.length;i++)
-//            {
-//                adapter.addItem(new CSdata(record[i]));
-//            }
+
         }catch (Exception e){
             Toast.makeText(this, "에러 발생", Toast.LENGTH_LONG).show();
         }
+
+        textView1.setText(String.valueOf(cnt_good_oily));
+        textView2.setText(String.valueOf(cnt_bad_oily));
+        textView3.setText(String.valueOf(cnt_good_dry));
+        textView4.setText(String.valueOf(cnt_bad_dry));
+        textView5.setText(String.valueOf(cnt_good_sens));
+        textView6.setText(String.valueOf(cnt_bad_sens));
+        textView7.setText(String.valueOf(cnt_allergies));
 
         recyclerView2.setAdapter(adapter);
 
