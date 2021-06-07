@@ -26,15 +26,29 @@
                 android:layout_height="50dp"
                 app:srcCompat="@mipmap/ic_launcher" />
 
-            <TextView
-                android:id="@+id/ContentName"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="이름"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:textColor="@color/black"
-                android:textSize="30sp"/>
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/ContentName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="이름"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/Contentingre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="15dp"
+                    android:text="타입쓰기" />
+            </LinearLayout>
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>
