@@ -45,35 +45,38 @@ public class MainContent extends AppCompatActivity {
             reader.readLine();
             CSVReader read = new CSVReader(reader);
             String[] record = null;
-            while ((record = read.readNext()) != null){
-                switch (record[3]){
-                    case "1" :
-                        adapter.addItem(new Maindata(record[1],R.drawable.grade1));
-                        break;
-                    case "2" :
-                        adapter.addItem(new Maindata(record[1],R.drawable.grade2));
-                        break;
-                    case "3" :
-                        adapter.addItem(new Maindata(record[1],R.drawable.grade3));
-                        break;
-                    case "4" :
-                        adapter.addItem(new Maindata(record[1],R.drawable.grade4));
-                        break;
-                    case "5" :
-                        adapter.addItem(new Maindata(record[1],R.drawable.grade5));
-                        break;
-                    case "6" :
-                        adapter.addItem(new Maindata(record[1],R.drawable.grade6));
-                        break;
-                    case "7" :
-                        adapter.addItem(new Maindata(record[1],R.drawable.grade7));
-                        break;
-                    case "8" :
-                        adapter.addItem(new Maindata(record[1],R.drawable.grade8));
-                        break;
-                    case "9" :
-                        adapter.addItem(new Maindata(record[1],R.drawable.grade9));
-                        break;
+            while ((record = read.readNext()) != null) {
+                // all_ingre_list안에 성분의 이름이 있으면 출력
+                if (all_ingre_list.contains(record[1])) {
+                    switch (record[3]) {
+                        case "1":
+                            adapter.addItem(new Maindata(record[1], R.drawable.grade1));
+                            break;
+                        case "2":
+                            adapter.addItem(new Maindata(record[1], R.drawable.grade2));
+                            break;
+                        case "3":
+                            adapter.addItem(new Maindata(record[1], R.drawable.grade3));
+                            break;
+                        case "4":
+                            adapter.addItem(new Maindata(record[1], R.drawable.grade4));
+                            break;
+                        case "5":
+                            adapter.addItem(new Maindata(record[1], R.drawable.grade5));
+                            break;
+                        case "6":
+                            adapter.addItem(new Maindata(record[1], R.drawable.grade6));
+                            break;
+                        case "7":
+                            adapter.addItem(new Maindata(record[1], R.drawable.grade7));
+                            break;
+                        case "8":
+                            adapter.addItem(new Maindata(record[1], R.drawable.grade8));
+                            break;
+                        case "9":
+                            adapter.addItem(new Maindata(record[1], R.drawable.grade9));
+                            break;
+                    }
                 }
             }
 //            for(int i = 0; i <record.length;i++)
