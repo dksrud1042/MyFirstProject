@@ -7,6 +7,7 @@ import androidx.core.content.FileProvider;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.ImageDecoder;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -50,6 +51,7 @@ public class CameraImage extends AppCompatActivity {
     static TextView imageDetail;     //문자인식 후 값받기
     Bitmap rotatedBitmap;   //image 회전 후 bitmap
     static String message;  //이미지에서 추출한 message값
+    static boolean TextCheck = false;  //텍스트 인식 완료 확인
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,15 +70,25 @@ public class CameraImage extends AppCompatActivity {
         serachButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //여기서 글자 분석 제품이름 추출하기
-                callCloudVision(rotatedBitmap);
-                searchButton.setText("검색 중");
-
-                //검색 결과 인텐트로 이동
-                Intent intent = new Intent(getApplicationContext(), SearchResult.class);
-                startActivityForResult(intent,MainActivity.SEARCHRESULT_CODE);
+                if (TextCheck == false) {
+                    TextView imageDetail = findViewById(R.id.image_details);
+                    imageDetail.setText("텍스트 인식중");
+                    //여기서 글자 분석 제품이름 추출하기
+                    callCloudVision(rotatedBitmap);
+                    searchButton.setText("검색 중");
+                }else{
+                    //검색 결과 액티비티로 이동
+                    Intent intent = new Intent(getApplicationContext(), SearchResult.class);
+                    startActivityForResult(intent, MainActivity.SEARCHRESULT_CODE);
+                    if (message != null) {
+                        //추출된 text값 보내기
+                        intent.putExtra("텍스트인식", message);
+                    }
+                    TextCheck = false;
+                }
             }
         });
+
         //endregion
     }
 
@@ -249,6 +261,10 @@ public class CameraImage extends AppCompatActivity {
                 //값을 받을 text값 설정
                 imageDetail = activity.findViewById(R.id.image_details);
                 imageDetail.setText(result);
+
+                TextCheck = true;
+                Button serachButton = activity.findViewById(R.id.serachButton);
+                serachButton.setText("제품 보기");
             }
         }
     }
@@ -298,14 +314,6 @@ public class CameraImage extends AppCompatActivity {
         }
 
         return message;
-    }
-
-    //문자 두줄만 추출(제목)
-    public static String SplitText()
-    {
-        String[] splitmessage = message.split("\n");
-
-        return splitmessage[0] + splitmessage[1];
     }
 
     //endregion

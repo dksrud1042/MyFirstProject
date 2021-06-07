@@ -26,6 +26,8 @@ public class SearchResult extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         CSdataAdapter adapter = new CSdataAdapter();
+        Intent intent = getIntent();
+        String message = intent.getStringExtra("텍스트인식");
 
         //CSV파일 읽기
         try {
@@ -35,37 +37,40 @@ public class SearchResult extends AppCompatActivity {
             CSVReader read = new CSVReader(reader);
             String[] record = null;
             while ((record = read.readNext()) != null){
-                switch (record[3]){
-                    case "verified" :
-                        adapter.addItem(new CSdata(record[2],R.drawable.grade0));
-                        break;
-                    case "1" :
-                        adapter.addItem(new CSdata(record[2],R.drawable.grade1));
-                        break;
-                    case "2" :
-                        adapter.addItem(new CSdata(record[2],R.drawable.grade2));
-                        break;
-                    case "3" :
-                        adapter.addItem(new CSdata(record[2],R.drawable.grade3));
-                        break;
-                    case "4" :
-                        adapter.addItem(new CSdata(record[2],R.drawable.grade4));
-                        break;
-                    case "5" :
-                        adapter.addItem(new CSdata(record[2],R.drawable.grade5));
-                        break;
-                    case "6" :
-                        adapter.addItem(new CSdata(record[2],R.drawable.grade6));
-                        break;
-                    case "7" :
-                        adapter.addItem(new CSdata(record[2],R.drawable.grade7));
-                        break;
-                    case "8" :
-                        adapter.addItem(new CSdata(record[2],R.drawable.grade8));
-                        break;
-                    case "9" :
-                        adapter.addItem(new CSdata(record[2],R.drawable.grade9));
-                        break;
+                if(record[2].contains(message))
+                {
+                    switch (record[3]) {
+                        case "verified":
+                            adapter.addItem(new CSdata(record[2], R.drawable.grade0));
+                            break;
+                        case "1":
+                            adapter.addItem(new CSdata(record[2], R.drawable.grade1));
+                            break;
+                        case "2":
+                            adapter.addItem(new CSdata(record[2], R.drawable.grade2));
+                            break;
+                        case "3":
+                            adapter.addItem(new CSdata(record[2], R.drawable.grade3));
+                            break;
+                        case "4":
+                            adapter.addItem(new CSdata(record[2], R.drawable.grade4));
+                            break;
+                        case "5":
+                            adapter.addItem(new CSdata(record[2], R.drawable.grade5));
+                            break;
+                        case "6":
+                            adapter.addItem(new CSdata(record[2], R.drawable.grade6));
+                            break;
+                        case "7":
+                            adapter.addItem(new CSdata(record[2], R.drawable.grade7));
+                            break;
+                        case "8":
+                            adapter.addItem(new CSdata(record[2], R.drawable.grade8));
+                            break;
+                        case "9":
+                            adapter.addItem(new CSdata(record[2], R.drawable.grade9));
+                            break;
+                    }
                 }
             }
 //            for(int i = 0; i <record.length;i++)
