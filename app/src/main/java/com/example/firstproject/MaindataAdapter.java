@@ -49,19 +49,13 @@ public class MaindataAdapter extends RecyclerView.Adapter<MaindataAdapter.ViewHo
         //뷰홀더 재사용
         Maindata item = items.get(position);
         //카드뷰에 이미지,텍스트 값
-        holder.CSName.setText(item.getName());
-        holder.CSImage.setImageResource(item.getCSImage());
+        holder.setItem(item);
     }
 
     //data set 전체크기
     @Override
     public int getItemCount() {
         return items.size();
-    }
-
-    //클릭 이벤트
-    public void setOnItemClickListener(OnRecyclerItemClickListener listener){
-        this.listener = listener;
     }
 
     static class ViewHolder extends  RecyclerView.ViewHolder{
@@ -71,11 +65,12 @@ public class MaindataAdapter extends RecyclerView.Adapter<MaindataAdapter.ViewHo
         //ViewHolder생성 + 클릭 이벤트(자세한 값은 SearchResult에서 조정)
         public ViewHolder(View itemView){
             super(itemView);
-            CSImage = itemView.findViewById(R.id.CSImage);
-            CSName = itemView.findViewById(R.id.CSName);
+
+            CSImage = itemView.findViewById(R.id.ContentImage);
+            CSName = itemView.findViewById(R.id.ContentName);
 
         }
-        public void setItem(CSdata item) {
+        public void setItem(Maindata item) {
             CSImage.setImageResource(item.getCSImage());
             CSName.setText(item.getName());
         }

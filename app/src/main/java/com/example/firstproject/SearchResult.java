@@ -78,7 +78,7 @@ public class SearchResult extends AppCompatActivity {
                             adapter.addItem(new CSdata(record[2], R.drawable.grade9));
                             break;
                     }
-                    all_ingre.add(record[4]);
+//                    all_ingre.add(record[4]);
                 }
 
             }
@@ -100,7 +100,7 @@ public class SearchResult extends AppCompatActivity {
                 CSdata item = adapter.getItem(position);
                 Intent intent = new Intent(getApplicationContext(),MainContent.class);
                 intent.putExtra("제품명",item.getName());
-                intent.putExtra("성분이름", all_ingre);
+               // intent.putExtra("성분이름", all_ingre);
                 startActivityForResult(intent,MainActivity.MAINCONTENT_CODE);
 
                 Toast.makeText(getApplicationContext(),"아이템 선택 " + item.getName(), Toast.LENGTH_LONG).show();
