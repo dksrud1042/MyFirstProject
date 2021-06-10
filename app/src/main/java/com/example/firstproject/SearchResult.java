@@ -33,6 +33,7 @@ public class SearchResult extends AppCompatActivity {
         CSdataAdapter adapter = new CSdataAdapter();
         Intent intent = getIntent();
         String message = intent.getStringExtra("텍스트인식");
+        Toast.makeText(getApplicationContext(),"아이템 선택 " + message, Toast.LENGTH_LONG).show();
 
         //CSV파일 읽기
         try {
