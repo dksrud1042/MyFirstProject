@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Search"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/textView7"
@@ -64,6 +65,7 @@
             android:inputType="textPersonName"
             android:paddingLeft="7dp"
             android:text=""
+            android:textColor="@color/black"
             app:srcCompat="@android:drawable/ic_menu_search" />
 
     </LinearLayout>

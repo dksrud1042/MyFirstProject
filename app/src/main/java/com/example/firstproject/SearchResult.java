@@ -33,6 +33,7 @@ public class SearchResult extends AppCompatActivity {
         CSdataAdapter adapter = new CSdataAdapter();
         Intent intent = getIntent();
         String message = intent.getStringExtra("텍스트인식");
+        Toast.makeText(getApplicationContext(),"아이템 선택 " + message, Toast.LENGTH_LONG).show();
 
         //CSV파일 읽기
         try {
@@ -44,7 +45,7 @@ public class SearchResult extends AppCompatActivity {
             while ((record = read.readNext()) != null){
                 record[2] = StringUtils.deleteWhitespace(record[2]);
                 message = StringUtils.deleteWhitespace(message);
-                if(record[2].contains(message))
+                if(StringUtils.containsIgnoreCase(record[2], message))
                 {
                     switch (record[3]) {
                         case "verified":
@@ -100,7 +101,7 @@ public class SearchResult extends AppCompatActivity {
                 CSdata item = adapter.getItem(position);
                 Intent intent = new Intent(getApplicationContext(),MainContent.class);
                 intent.putExtra("제품명",item.getName());
-               // intent.putExtra("성분이름", all_ingre);
+                // intent.putExtra("성분이름", all_ingre);
                 startActivityForResult(intent,MainActivity.MAINCONTENT_CODE);
 
                 Toast.makeText(getApplicationContext(),"아이템 선택 " + item.getName(), Toast.LENGTH_LONG).show();

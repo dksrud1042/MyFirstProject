@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
     public static final int CAMERAIMAGE_CODE = 3;   //사진으로 검색 화면 이동 requestcode값
     public static final int SEARCHRESULT_CODE = 4;  //검색결과 화면 이동 requestCode값
     public static final int MAINCONTENT_CODE = 5;   //상세정보창 화면 이동 requestCode값
+    public static final int Search_Code = 6;        //검색으로 이동 화면 이동 requestCode값
     //endregion
 
     //region 구글 API 비전 사용
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
 
 
         //필요한 위험권환 자동 부여
-        AutoPermissions.Companion.loadAllPermissions(this,CAMERA_CODE);
+        AutoPermissions.Companion.loadAllPermissions(this, CAMERA_CODE);
 
         //region 내 피부 타입 등록하기 버튼 클릭시 발생 이벤트
         ImageButton skinButton = findViewById(R.id.skinType);
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Survey.class);
-                startActivityForResult(intent,SURVEY_CODE);         //실행
+                startActivityForResult(intent, SURVEY_CODE);         //실행
             }
         });
         //endregion
@@ -66,72 +67,23 @@ public class MainActivity extends AppCompatActivity implements AutoPermissionsLi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CameraImage.class);
-                startActivityForResult(intent,CAMERAIMAGE_CODE);
+                startActivityForResult(intent, CAMERAIMAGE_CODE);
             }
         });
         //endregion
 
-//        //csv파일읽기//////////////////////////////////////
-//        readCsvData();
+        //region 이름으로 검색
+        ImageView searchButton = findViewById(R.id.searchButton);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Search.class);
+                startActivityForResult(intent, Search_Code);
+            }
+        });
+
+        //endregion
     }
-
-//    //region파일 읽는부분////////////////////////////////////////
-//    private void readCsvData() {
-//        InputStream is = getResources().openRawResource(R.raw.result);
-//        BufferedReader reader = new BufferedReader(
-//                new InputStreamReader(is, Charset.forName("UTF-8"))
-//        );
-//
-//        String line = "";
-//        try {
-//            //헤더부분 건너뛰기
-//            reader.readLine();
-//
-//            while ((line = reader.readLine()) != null) {
-//                // split by ','
-//                String[] tokens = line.split(",");
-//
-//                //read the data
-//                CSdata sample = new CSdata();
-//                sample.setName(tokens[1]);
-//                //tokens[1] == "검색하는 제품 이름"이면 if 해서 sample값에 담기게된다
-//
-//                sample.setGrade(Integer.parseInt(tokens[3]));
-//                if (tokens[4].length() > 0) {
-//                    sample.setAllergies(Integer.parseInt(tokens[4]));
-//                } else {
-//                    sample.setAllergies(2);
-//                }
-//
-//                if (tokens[5].length() > 0) {
-//                    sample.setOily_skin(Integer.parseInt(tokens[5]));
-//                } else {
-//                    sample.setOily_skin(2);
-//                }
-//
-//                if (tokens[6].length() > 0) {
-//                    sample.setDry_skin(Integer.parseInt(tokens[6]));
-//                } else {
-//                    sample.setDry_skin(2);
-//                }
-//
-//                if (tokens.length >= 8 && tokens[7].length() > 0) {
-//                    sample.setSensitivity_skin(Integer.parseInt(tokens[7]));
-//                } else {
-//                    sample.setSensitivity_skin(2);
-//                }
-//
-//
-//                Log.d("shat", "yeee!" + sample);
-//            }
-//        } catch (IOException e) {
-//            Log.wtf("shat", "error" + line, e);
-//            e.printStackTrace();
-//        }
-//
-//    }
-    //endregion//////////////////////////////////////////
-
 
     //region 위험권환 부여
     @Override
